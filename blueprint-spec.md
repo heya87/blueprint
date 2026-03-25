@@ -35,7 +35,7 @@ blueprint-app/
 │   ├── src/
 │   │   └── main/
 │   │       ├── kotlin/
-│   │       │   └── com/appname/
+│   │       │   └── ch/appname/
 │   │       │       ├── auth/
 │   │       │       │   ├── AuthResource.kt       # POST /auth/register, /auth/login, /auth/me
 │   │       │       │   ├── AuthService.kt        # Business logic, password hashing, JWT issuing
