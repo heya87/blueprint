@@ -1,0 +1,31 @@
+# Environment
+.env
+*.pem
+
+# Backend (Gradle + Quarkus)
+backend/.gradle/
+backend/build/
+backend/.quarkus/
+*.class
+*.jar
+!gradle-wrapper.jar
+
+# Frontend (Next.js / Node)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env.local
+frontend/.env.*.local
+
+# IDE — IntelliJ (backend)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# IDE — VS Code (frontend)
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
