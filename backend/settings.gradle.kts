@@ -8,8 +8,8 @@ pluginManagement {
     }
     plugins {
         id(quarkusPluginId) version quarkusPluginVersion
-        kotlin("jvm") version "2.0.0"
-        kotlin("plugin.allopen") version "2.0.0"
+        kotlin("jvm") version "2.3.10"
+        kotlin("plugin.allopen") version "2.3.10"
     }
 }
 rootProject.name="backend"
