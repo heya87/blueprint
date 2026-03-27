@@ -3,6 +3,8 @@ package ch.blueprint.auth
 import io.smallrye.jwt.build.Jwt
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
+import jakarta.ws.rs.BadRequestException
+import jakarta.ws.rs.NotAuthorizedException
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import java.time.Duration
 
@@ -15,7 +17,7 @@ class AuthService {
     @Transactional
     fun register(email: String, password: String): String {
         if (UserEntity.findByEmail(email) != null) {
-            throw IllegalArgumentException("Email already in use")
+            throw BadRequestException("Email already in use")
         }
         val user = UserEntity().apply {
             this.email = email
@@ -27,9 +29,9 @@ class AuthService {
 
     fun login(email: String, password: String): String {
         val user = UserEntity.findByEmail(email)
-            ?: throw IllegalArgumentException("Invalid credentials")
+            ?: throw NotAuthorizedException("Invalid credentials")
         if (!verifyPassword(password, user.passwordHash)) {
-            throw IllegalArgumentException("Invalid credentials")
+            throw NotAuthorizedException("Invalid credentials")
         }
         return issueToken(user)
     }

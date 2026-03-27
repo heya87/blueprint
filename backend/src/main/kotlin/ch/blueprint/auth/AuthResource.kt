@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.*
+import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.eclipse.microprofile.jwt.JsonWebToken
 
 @Path("/auth")
@@ -20,6 +21,9 @@ class AuthResource {
 
     @Inject
     lateinit var jwt: JsonWebToken
+
+    @ConfigProperty(name = "auth.cookie.secure", defaultValue = "true")
+    var cookieSecure: Boolean = true
 
     @POST
     @Path("/register")
@@ -54,7 +58,7 @@ class AuthResource {
             .path("/")
             .maxAge(0)
             .httpOnly(true)
-            .secure(true)
+            .secure(cookieSecure)
             .build()
         return Response.noContent().cookie(expiredCookie).build()
     }
@@ -65,7 +69,7 @@ class AuthResource {
             .path("/")
             .maxAge(3600)
             .httpOnly(true)
-            .secure(true)
+            .secure(cookieSecure)
             .sameSite(NewCookie.SameSite.STRICT)
             .build()
         return Response.ok().cookie(cookie).build()
