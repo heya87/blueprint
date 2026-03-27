@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Blueprint",
-  description: "A reusable full-stack web app blueprint",
+  title: "APP_TITLE_PLACEHOLDER",
+  description: "APP_TITLE_PLACEHOLDER",
 };
 
 export default function RootLayout({

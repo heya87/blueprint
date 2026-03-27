@@ -56,7 +56,7 @@ export default function Home() {
     <ProtectedRoute>
       <div className={styles.page}>
         <header className={styles.header}>
-          <span className={styles.logo}>Blueprint</span>
+          <span className={styles.logo}>APP_TITLE_PLACEHOLDER</span>
           <div className={styles.headerRight}>
             <span className={styles.email}>{user?.email}</span>
             <button onClick={handleLogout} className={styles.logoutBtn}>Logout</button>

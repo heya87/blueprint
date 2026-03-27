@@ -26,14 +26,21 @@ if [[ ! "$APP_NAME" =~ ^[a-z][a-z0-9_]*$ ]]; then
   exit 1
 fi
 
-# 2. Domain
+# 2. Display title
+read -p "App display title (shown in browser tab and header, e.g. My Shop): " APP_TITLE
+if [[ -z "$APP_TITLE" ]]; then
+  echo "Error: display title cannot be empty."
+  exit 1
+fi
+
+# 3. Domain
 read -p "Domain (e.g. myshop.com): " DOMAIN
 if [[ -z "$DOMAIN" ]]; then
   echo "Error: domain cannot be empty."
   exit 1
 fi
 
-# 3. Java home
+# 4. Java home
 echo ""
 echo "Java home path for Gradle (leave empty to skip, e.g. /Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home):"
 read -p "> " JAVA_HOME_PATH
@@ -55,8 +62,9 @@ sedi "s/myapp\.com/$DOMAIN/g" backend/src/main/resources/application.properties
 # .env.example
 sedi "s/myapp\.com/$DOMAIN/g" .env.example
 
-# Frontend layout title
-sedi "s/title: \"Blueprint\"/title: \"$APP_NAME\"/g" frontend/src/app/layout.tsx
+# Frontend title and logo
+sedi "s/APP_TITLE_PLACEHOLDER/$APP_TITLE/g" frontend/src/app/layout.tsx
+sedi "s/APP_TITLE_PLACEHOLDER/$APP_TITLE/g" frontend/src/app/page.tsx
 
 # Rename Kotlin package directory
 if [ -d "backend/src/main/kotlin/ch/blueprint" ]; then
