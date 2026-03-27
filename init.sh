@@ -16,9 +16,13 @@ echo "=============="
 echo ""
 
 # 1. App name
-read -p "App name (lowercase, no spaces, e.g. myshop): " APP_NAME
+read -p "App name (lowercase letters, numbers, underscores only, e.g. myshop): " APP_NAME
 if [[ -z "$APP_NAME" ]]; then
   echo "Error: app name cannot be empty."
+  exit 1
+fi
+if [[ ! "$APP_NAME" =~ ^[a-z][a-z0-9_]*$ ]]; then
+  echo "Error: app name must start with a lowercase letter and contain only lowercase letters, numbers, or underscores (no hyphens)."
   exit 1
 fi
 
